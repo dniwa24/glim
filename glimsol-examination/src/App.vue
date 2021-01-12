@@ -7,7 +7,11 @@
     >
       <v-toolbar-title>Examination</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-btn color="primary" depressed dark @click="drawer = true">
+        <v-icon>mdi-cart</v-icon>
+        <v-badge color="green"  :content="notification" :value="notification"></v-badge>
+      </v-btn>
+      <!-- <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon> -->
     </v-app-bar>
 
     <v-navigation-drawer :width="350" v-model="drawer" absolute temporary right>
@@ -99,6 +103,7 @@ export default {
             ],
             cart: [],
             totalPrice: 0,
+            notification: 0
     }
   },
   methods: {
@@ -110,10 +115,13 @@ export default {
       if(prod){
         prod.qty += 1;
         this.totalPrice += product.price;
+        this.notification++;
+
         return;
       } 
       this.cart.push(product);
       this.totalPrice += product.price;
+      this.notification++;
       
     }
   }
